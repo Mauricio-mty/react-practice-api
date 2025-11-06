@@ -1,9 +1,9 @@
-const sequelize = require('sequelize');
-const { DataTypes} = sequelize;
+const sequelize = require('../config/db');
+const { DataTypes} = require('sequelize');;
 const {v4:uuidv4, validate} = require('uuid');
 
 
-const User = sequelize.define('User'.{
+const User = sequelize.define('Usuario',{
     id: {
         type:DataTypes.UUID,
         allowNull:false,
