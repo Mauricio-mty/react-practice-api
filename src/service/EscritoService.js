@@ -64,10 +64,9 @@ EscritoService.deleteEscrito = async (escritoId) => {
         console.error('Error deleting escrito:', error);
         throw new Error("No se pudo eliminar el escrito");
     }
-<<<<<<< HEAD
+
 }
 
 module.exports = EscritoService;
-=======
-}
->>>>>>> 5575f450d5b273f9ba6beab2f1c67a5c9dd48cac
+
+
