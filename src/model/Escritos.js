@@ -3,7 +3,7 @@ const { DataTypes} = require('sequelize');;
 const {v4:uuidv4, validate} = require('uuid');
 const User = require('./User');
 
-const Escrito = sequelize.define('Escrito',{
+const Escrito = sequelize.define('escrito',{
     id:{
         type:DataTypes.UUID,
         allowNull:false,
