@@ -4,6 +4,7 @@ const EscritoController = require('../controller/EscritoController');
 
 router.get('/',EscritoController.getAll);
 router.get('/:id',EscritoController.getById);
+router.get('/user/:userId',EscritoController.getByUserId);
 
 router.post('/',EscritoController.create);
 

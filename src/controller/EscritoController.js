@@ -52,3 +52,13 @@ exports.delete= async(req,res)=>{
         res.status(500).json({message: e.message});
     }
 }
+
+//find by userid
+exports.getByUserId= async(req,res)=>{
+    try{
+        const escritos= await Escrito.getEscritosByUserId(req.params.userId);
+        res.status(200).json(escritos);
+    }catch(e){
+        res.status(500).json({message: e.message});
+    }
+}

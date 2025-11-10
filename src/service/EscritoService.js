@@ -67,6 +67,17 @@ EscritoService.deleteEscrito = async (escritoId) => {
 
 }
 
+//find by user
+EscritoService.getEscritosByUserId = async(id) => {
+    try {
+        const escritos= await Escrito.findAll({ where: { userId:id } });
+        return {message:`escritos del usuario${id}`,escritos};
+    } catch (error) {
+        console.error('Error fetching escritos by user ID:', error);
+        throw new Error("No se pudieron obtener los escritos del usuario");        
+    }
+}
+
 module.exports = EscritoService;
 
 
