@@ -1,10 +1,11 @@
 const express = require("express");
 const sequelize = require("./src/config/db");
 require('./src/model/association');
-
+const configRoutes  = require("./src/config/routes-config");
 
 const app = express();
-app.use(express.json());
+
+configRoutes(app);
 
 const initDB = async () => {
    try{
