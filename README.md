@@ -7,6 +7,7 @@ A RESTful API built with Node.js, Express, and Sequelize for managing users and 
 - **User Management**: Full CRUD operations for users (create, read, update, delete)
 - **Escrito Management**: Full CRUD operations for writings/texts associated with users
 - **User-Escrito Relationships**: Retrieve writings by specific users
+- **Authentication**: JWT-based login system for secure access
 - **Database Integration**: Uses Sequelize ORM with PostgreSQL
 - **Environment Configuration**: Secure environment variable handling with dotenv
 
@@ -32,6 +33,7 @@ A RESTful API built with Node.js, Express, and Sequelize for managing users and 
    DB_HOST=your_database_host
    DB_PORT=your_database_port
    DB_DIALECT=postgres
+   JWT_SECRET=your_jwt_secret
    ```
 
 4. Ensure PostgreSQL is running and the database exists.
@@ -52,6 +54,12 @@ npm start
 The server will run on port 3000 by default.
 
 ## API Endpoints
+
+### Authentication
+
+- **POST /login** - User login
+  - Body: `{ "mail": "email", "password": "string" }`
+  - Response: `{ "message": "credenciales validas", "token": "jwt_token" }`
 
 ### Users
 
@@ -82,13 +90,17 @@ src/
 │   ├── db.js              # Database configuration
 │   └── routes-config.js   # Route configuration
 ├── controller/
+│   ├── authController.js      # Authentication logic
 │   ├── UserController.js      # User endpoints logic
 │   └── EscritoController.js   # Escrito endpoints logic
+├── middlewares/
+│   └── authMiddleware.js      # JWT authentication middleware
 ├── model/
 │   ├── User.js            # User model
 │   ├── Escritos.js        # Escrito model
 │   └── association.js     # Model associations
 ├── routes/
+│   ├── Login.js           # Login routes
 │   ├── UserRoutes.js      # User routes
 │   └── EscritoRoutes.js   # Escrito routes
 └── service/
@@ -102,6 +114,8 @@ src/
 - **Express.js**: Web framework for Node.js
 - **Sequelize**: Promise-based Node.js ORM for Postgres
 - **PostgreSQL**: Relational database
+- **JWT**: JSON Web Tokens for authentication
+- **bcrypt**: Password hashing
 - **UUID**: For generating unique identifiers
 - **Dotenv**: Environment variable management
 - **Nodemon**: Development tool for auto-restarting
@@ -119,12 +133,19 @@ src/
 - text: Text (Required)
 - userId: UUID (Foreign Key to User)
 
+## Authentication
+
+The API uses JWT (JSON Web Tokens) for authentication. To access protected endpoints, include the token in the Authorization header as `Bearer <token>`.
+
 ## Error Handling
 
 The API includes comprehensive error handling with appropriate HTTP status codes:
 - 200: Success
 - 201: Created
 - 204: No Content (for deletions)
+- 401: Unauthorized (invalid credentials or token)
+- 403: Forbidden (missing token)
+- 404: Not Found
 - 500: Internal Server Error
 
 ## Contributing
