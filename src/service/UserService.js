@@ -1,11 +1,13 @@
 const User = require('../model/User');
 const sequelize = require('../config/db');
+const brcypt =  require('bcryptjs');
 
 const UserServices = {};
 
 UserServices.createUser = async (userData) => {
     try{
-        const new_user = await User.create(userData);
+        const hash= await brcypt.hash(userData.password,12)
+        const new_user = await User.create({...userData,password:hash});
         return new_user;
     }catch(error){
         console.error('Error creating user:', error);
