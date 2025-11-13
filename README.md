@@ -6,6 +6,7 @@ A RESTful API built with Node.js, Express, and Sequelize for managing users and 
 
 - **User Management**: Full CRUD operations for users (create, read, update, delete)
 - **Escrito Management**: Full CRUD operations for writings/texts associated with users
+- **User Role Management**: Full CRUD operations for user roles
 - **User-Escrito Relationships**: Retrieve writings by specific users
 - **Authentication**: JWT-based login system for secure access
 - **Database Integration**: Uses Sequelize ORM with PostgreSQL
@@ -71,6 +72,12 @@ The server will run on port 3000 by default.
   - Body: `{ "name": "string", "mail": "email", "password": "string" }`
 - **DELETE /user/:id** - Delete user by ID
 
+### User Roles
+
+- **GET /userrol** - Get all user roles
+- **POST /userrol** - Create a new user role
+  - Body: `{ "type": "string" }`
+
 ### Escritos (Writings)
 
 - **GET /escrito** - Get all escritos
@@ -92,19 +99,23 @@ src/
 ├── controller/
 │   ├── authController.js      # Authentication logic
 │   ├── UserController.js      # User endpoints logic
+│   ├── UserRolController.js   # User role endpoints logic
 │   └── EscritoController.js   # Escrito endpoints logic
 ├── middlewares/
 │   └── authMiddleware.js      # JWT authentication middleware
 ├── model/
 │   ├── User.js            # User model
+│   ├── UserRol.js         # User role model
 │   ├── Escritos.js        # Escrito model
 │   └── association.js     # Model associations
 ├── routes/
 │   ├── Login.js           # Login routes
 │   ├── UserRoutes.js      # User routes
+│   ├── UserRolRoutes.js   # User role routes
 │   └── EscritoRoutes.js   # Escrito routes
 └── service/
     ├── UserService.js     # User business logic
+    ├── UserRolService.js  # User role business logic
     └── EscritoService.js  # Escrito business logic
 ```
 
@@ -127,6 +138,10 @@ src/
 - name: String (Required)
 - mail: String (Required, Unique, Email validation)
 - password: String (Required)
+
+### User Role
+- id: UUID (Primary Key)
+- tipo: String (Required, mapped to 'type' in API)
 
 ### Escrito
 - id: UUID (Primary Key)
