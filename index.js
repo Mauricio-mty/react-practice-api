@@ -14,12 +14,13 @@ const initDB = async () => {
       await sequelize.sync({force:false});
       console.log('All models were synchronized successfully.');
    }catch(error){   
-   console.error('Unable to connect to the database:', error);
+   console.error('Unable to connect to the database:', error)
+   console.error("The server will still start, but database operations will not work.");
  }
 
 }
 
-initDB().then(()=>{
+initDB().finally(()=>{
     app.listen(3000, ()=> console.log('Server is running on port 3000')
     )});
 

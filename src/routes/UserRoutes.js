@@ -11,4 +11,4 @@ router.get('/:id',authMiddleware,UserController.getById);
 router.put('/:id',authMiddleware,UserController.update);
 router.delete('/:id',authMiddleware,UserController.delete);
 
-module.exports=router
+module.exports=router;

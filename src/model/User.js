@@ -1,6 +1,7 @@
 const sequelize = require('../config/db');
 const { DataTypes} = require('sequelize');
 const {v4:uuidv4} = require("uuid");
+const rol = require('./UserRol');
 
 
 const User = sequelize.define('usuario',{
@@ -26,8 +27,14 @@ const User = sequelize.define('usuario',{
         type:DataTypes.STRING,
         allowNull:false,    
 
-    }
-    
+    },userRolId:{
+        type:DataTypes.UUID,
+        references:{
+            model:rol,
+            key:'id',
+        },
+    },
+
 });
 
 module.exports = User;
