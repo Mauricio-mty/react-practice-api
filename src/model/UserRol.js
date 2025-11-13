@@ -9,10 +9,10 @@ const UserRol = sequelize.define('usuario_rol',{
         primaryKey:true,
         defaultValue:uuidv4
     },
-    type:{
+    tipo:{
         type:DataTypes.STRING,
-        allowNull:false,
-
+       
+        field: 'tipo'
     },
 })
 

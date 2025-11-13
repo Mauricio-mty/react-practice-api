@@ -41,6 +41,7 @@ UserServices.updateUser = async (userId, updateData) => {
         if(!data){
             throw new Error ('Usuario no encontrado');
         }
+        if(updateData.password) updateData.password = await brcypt.hash(updateData.password,12);
         await data.update(updateData);
         return data;
     }
