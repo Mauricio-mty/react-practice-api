@@ -1,4 +1,5 @@
 const express = require("express");
+const rateLimit = require("../middlewares/limiterMiddleware");
 
 const User = require("../routes/UserRoutes");
 const Escrito = require("../routes/EscritoRoutes");
@@ -7,6 +8,7 @@ const UserRol = require("../routes/UserRolRoutes");
 
 const configRoutes = (app) => {
     app.use(express.json());
+    app.use(rateLimit);
     
     app.use("/login",Login);
     app.use("/user",User);
