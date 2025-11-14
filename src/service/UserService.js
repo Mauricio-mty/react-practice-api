@@ -66,4 +66,19 @@ UserServices.deleteUser = async (userId) => {
         throw new Error("No se pudo eliminar el usuario");
     }
 }
+
+
+UserServices.changePassword = async(userId,data)=>{
+    try {
+        const user = await User.findByPk(userId);
+        if(!data) throw new Error("Usuario no encontrado");
+        data.password = brcypt.hash(data.password,12);
+        await user.update(data);
+        return data;
+        
+    } catch (e) {
+        console.error('Error change password:', error);
+        throw new Error("No se pudo actualizar la clave");
+    }
+}
 module.exports = UserServices;
